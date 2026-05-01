@@ -6,6 +6,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 
 ---
 
+## [0.1.2] — 2026-05-01
+
+### Added
+
+- `AppConfig.enableE2E` — opt-in end-to-end encryption flag. When `true`, message content is encrypted client-side before sending and decrypted on receipt using a dual-layer PSALMS + RSA-OAEP cipher
+- `OrbitProvider` now generates an RSA-OAEP 2048-bit key pair and a random per-session PSALMS key on mount when `enableE2E` is enabled. Uses Web Crypto API (available in RN 0.71+ via JSI)
+- `useMessages` encrypts outgoing content before `POST` and decrypts incoming content on initial load and `message:new` WebSocket events. Gracefully falls back to raw content if decryption fails (handles legacy non-encrypted messages)
+- `useAppConfig` returns `enableE2E` with a safe default of `false`
+
+---
+
 ## [0.1.1] — 2025-04-27
 
 ### Fixed
@@ -82,4 +93,5 @@ Initial public release.
 
 ---
 
+[0.1.2]: https://github.com/core-dynamics/orbitconnect-sdk/releases/tag/rn-v0.1.2
 [0.1.0]: https://github.com/core-dynamics/orbitconnect-sdk/releases/tag/v0.1.0
